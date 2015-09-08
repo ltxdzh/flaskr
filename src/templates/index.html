@@ -1,0 +1,26 @@
+{% extends "framework.html" %}
+
+{% block title %}Home{% endblock %}
+
+
+{% block content %}
+
+<div class="container-div">
+
+	<div class="page-header">
+	  	<h2>Welcome</h2>
+	</div>
+  
+	<p>
+		Welcome to Elong SuperVisor Monitor!
+	</p>
+	
+	{% if not session.logged_in %}
+	<p>
+		Please <a href="{{ url_for('login') }}">Sign in</a>
+	</p>
+	{% endif %}
+	
+</div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends "framework.html" %}
+
+{% block title %}Entries{% endblock %}
+
+{% block content %}
+	
+<div class="container-div">
+
+	<div class="page-header">
+	  	<h2>Entries</h2>
+	</div>
+  
+
+	{% if not session.logged_in %}
+	<p>
+		Please <a href="{{ url_for('login') }}">Sign in</a>
+	</p>
+	
+	{% else %}
+	
+	{% if entries %}
+	
+		<table class="table-hover table-striped">
+			<thead>
+			<tr>
+			  <th width="10%">#</th>
+			  <th width="60%">Content</th>
+			  <th width="30%">Option</th>
+			</tr>
+			</thead>
+			
+			<tbody>
+			{% for entry in entries %}
+			  
+			  <tr class="active">
+			    <th scope="row" width="10%" align="center">{{ loop.index }}</th>
+			    <td width="60%">
+				  {{ entry.title }}<br />
+				  {{ entry.text|safe }}
+				</td>
+				
+				<form id="{{ entry.id }}" method="post">
+				
+				<input type="hidden" name="id" value="{{ entry.id }}">
+
+				<td width="30%" align="center">
+				  <button id="alter_{{ entry.id }}" type="button" class="btn btn-sm btn-success" onclick="handleEntry('{{ entry.id }}', 'alter')">&nbsp;alter&nbsp;</button>
+				  <button id="delete_{{ entry.id }}" type="button" class="btn btn-sm btn-danger" onclick="handleEntry('{{ entry.id }}', 'delete')">delete</button>
+				</td>
+				
+				</form>
+				
+			  </tr>
+			  
+			{% endfor %}
+			
+			</tbody>
+			
+		</table>
+		
+	{% else %}
+	  	<p>Unbelievable.  No entries here so far</p>
+	
+	{% endif %}
+
+{% endif %}
+	
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+function handleEntry(form_id, act) {
+	
+	document.getElementById(act + "_" + form_id).blur();
+	
+	var form_obj = document.getElementById(form_id);
+	var isconfirmed = window.confirm("do you really want to " + act + " entry " + form_id);
+	
+	if (isconfirmed == true) {
+		
+		if (act == "delete") {
+			
+			form_obj.action="{{ url_for('delete_entry') }}";
+			form_obj.submit();
+			
+		} else if (act == "alter") {
+			
+			form_obj.action="{{ url_for('show_alter') }}";
+			form_obj.submit();
+		}
+	}
+}
+
+</script>
+
+{% endblock %}

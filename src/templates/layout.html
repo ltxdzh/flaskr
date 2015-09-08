@@ -1,0 +1,55 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Flaskr{% endblock %}
+
+{% block navbar %}
+
+<div class="navbar navbar-inverse" role="navigation"> 
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" 
+        data-toggle="collapse" data-target=".navbar-collapse"> 
+        <span class="sr-only">Toggle navigation</span> 
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Flasky</a> 
+    </div>
+    <div class="navbar-collapse collapse"> 
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li> 
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+<!-- 
+<div class=page>
+
+	<h1>Flaskr</h1>
+	
+	<div class=metanav>
+	
+	{% if not session.logged_in %}
+		<a href="{{ url_for('login') }}">log in</a>
+	  	
+	{% else %}
+	  	<a href="{{ url_for('logout') }}">log out</a>&sp;
+	  	<a href="{{ url_for('show_add_table') }}">add entry</a>
+	  	
+	{% endif %}
+	
+	</div>
+	
+	{% for message in get_flashed_messages() %}
+	
+	  	<div class=flash>{{ message }}</div>
+	  	
+	{% endfor %}
+	
+	{% block body %}{% endblock %}
+  
+</div> -->
